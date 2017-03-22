@@ -44,7 +44,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new \AppFoundations\CommunicationsBundle\LogiccFoundationsCommunicationsBundle()
+            new \AppFoundations\CommunicationsBundle\AppFoundationsCommunicationsBundle()
         );
 
         // ...
