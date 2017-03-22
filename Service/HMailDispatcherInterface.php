@@ -5,8 +5,8 @@ namespace AppFoundations\CommunicationsBundle\Service;
 
 
 
-namespace AppFoundations\CommunicationsBundle\Model\HMail;
-namespace AppFoundations\CommunicationsBundle\Model\HMailSendAttempt;
+use AppFoundations\CommunicationsBundle\Model\HMail;
+use AppFoundations\CommunicationsBundle\Model\HMailSendAttempt;
 
 interface HMailDispatcherInterface
 {
