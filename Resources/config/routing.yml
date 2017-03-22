@@ -1,0 +1,3 @@
+logicc_foundations_communications_homepage:
+    path:     /comms/
+    defaults: { _controller: AppFoundationsCommunicationsBundle:Default:index }

@@ -1,0 +1,26 @@
+{
+  "name" : "appfoundations/communications-bundle",
+  "description" : "A communications (email and sms) bundle",
+  "version" : "0.0.1",
+  "type" : "symfony-bundle",
+  "authors" : [{
+    "name" : "demo",
+    "email" : "demo@company.com"
+  }],
+  "minimum-stability" : "beta",
+  "keywords" : [
+    "email bundle"
+  ],
+  "license" : [
+    "MIT"
+  ],
+  "require" : {
+    "sendgrid/sendgrid": "^5.2"
+  },
+  "autoload" : {
+    "psr-0" : {
+      "AppFoundations\\CommunicationsBundle" : ""
+    }
+  },
+  "target-dir" : "AppFoundations/CommunicationsBundle"
+}
