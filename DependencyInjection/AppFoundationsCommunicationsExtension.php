@@ -24,5 +24,16 @@ class AppFoundationsCommunicationsExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('logicc_foundations_communications.sms',array(
+            'provider' => $config['sms']['provider'],
+            'mode' => $config['sms']['mode'],
+            'persistence' => $config['sms']['persistence'],
+            'minhour' => $config['sms']['minhour'],
+            'dynmark' => array (
+                'username' => $config['sms']['dynmark']['username'],
+                'password' => $config['sms']['dynmark']['password'],
+            ),
+        ));
     }
 }

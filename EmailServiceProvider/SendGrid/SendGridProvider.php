@@ -14,6 +14,7 @@ use SendGrid\Content;
 use SendGrid\Email;
 use SendGrid\Mail;
 use SendGrid\Personalization;
+use SendGrid\ReplyTo;
 
 
 class SendGridProvider implements EmailServiceProviderInterface
@@ -81,6 +82,10 @@ class SendGridProvider implements EmailServiceProviderInterface
         }
 
         $mail->addPersonalization($personalization);
+
+        if ($message->getReplyTo() != null) {
+            $mail->setReplyTo( new ReplyTo( $message->getReplyTo()->getAddresss() ) );
+        }
 
         $content = null;
         switch ($message->getContent()->getType()){

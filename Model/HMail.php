@@ -33,6 +33,8 @@ class HMail implements JsonSerializable
      */
     private $content;
 
+    private $replyTo;
+
 
     public function __construct()
     {
@@ -130,6 +132,18 @@ class HMail implements JsonSerializable
     public function setTo(array $to)
     {
         $this->to = $to;
+    }
+
+    public function getReplyTo()
+    {
+        return $this->replyTo;
+    }
+
+    public function setReplyTo($replyTo)
+    {
+        $this->replyTo = $replyTo;
+
+        return $this;
     }
 
     /**
