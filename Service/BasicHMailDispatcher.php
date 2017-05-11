@@ -5,7 +5,9 @@ namespace AppFoundations\CommunicationsBundle\Service;
 
 
 
+use AppFoundations\CommunicationsBundle\EmailServiceProvider\Dummy\DummyEmailProvider;
 use AppFoundations\CommunicationsBundle\EmailServiceProvider\EmailServiceProviderInterface;
+use AppFoundations\CommunicationsBundle\EmailServiceProvider\SendGrid\SendGridProvider;
 use AppFoundations\CommunicationsBundle\Model\EmailProviderResult;
 use AppFoundations\CommunicationsBundle\Model\HMail;
 use AppFoundations\CommunicationsBundle\Model\HMailSendAttempt;
@@ -18,10 +20,18 @@ class BasicHMailDispatcher implements HMailDispatcherInterface
      */
     private $emailServiceProvider;
 
-    public function __construct(EmailServiceProviderInterface $emailServiceProvider)
+    public function __construct($configuration)
     {
-
-        $this->emailServiceProvider = $emailServiceProvider;
+        switch ($configuration['provider']) {
+            case HermesEmailService::PROVIDER_DUMMY:
+                $this->emailServiceProvider = new DummyEmailProvider();
+                break;
+            case HermesEmailService::PROVIDER_SENDGRID:
+                $this->emailServiceProvider = new SendGridProvider($configuration['sendgridKey']);
+                break;
+            default:
+                throw new \Exception('Unknown provider: ' . $configuration['provider']);
+        }
     }
 
     /**
