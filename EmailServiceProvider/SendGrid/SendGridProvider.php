@@ -84,7 +84,7 @@ class SendGridProvider implements EmailServiceProviderInterface
         $mail->addPersonalization($personalization);
 
         if ($message->getReplyTo() != null) {
-            $mail->setReplyTo( new ReplyTo( $message->getReplyTo()->getAddresss() ) );
+            $mail->setReplyTo( new ReplyTo( $message->getReplyTo()->getAddress() ) );
         }
 
         $content = null;
