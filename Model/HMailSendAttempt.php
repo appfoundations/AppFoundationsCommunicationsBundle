@@ -92,9 +92,9 @@ class HMailSendAttempt implements JsonSerializable
         return [
             'hMailSendAttempt' => [
                 'attemptStatus' => $this->attemptStatus,
-                'message' => $this->message->jsonSerialize(),
+                'message' => is_null($this->message)?'null':$this->message->jsonSerialize(),
                 'providerName' => $this->providerName,
-                'provider' => $this->providerResult->jsonSerialize(),
+                'provider' => is_null($this->providerResult)?'null':$this->providerResult->jsonSerialize(),
                 'attemptDetails' => $this->attemptDetails
             ]
         ];
