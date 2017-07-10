@@ -26,7 +26,7 @@ class AppFoundationsCommunicationsExtension extends Extension
         $loader->load('services.yml');
 
         if (isset($config['sms'])) {
-            $container->setParameter('logicc_foundations_communications.sms',array(
+            $container->setParameter('app_foundations_communications.sms',array(
                 'provider' => $config['sms']['provider'],
                 'mode' => $config['sms']['mode'],
                 'persistence' => $config['sms']['persistence'],
@@ -37,7 +37,21 @@ class AppFoundationsCommunicationsExtension extends Extension
                 ),
             ));
         } else {
-            $container->setParameter('logicc_foundations_communications.sms',array());
+            $container->setParameter('app_foundations_communications.sms',array());
+        }
+
+        if (isset($config['email'])){
+            $emailParams = array(
+                'provider' => $config['email']['provider'],
+                'sendgridKey' => $config['email']['sendgrid']['key']
+            );
+
+            $container->setParameter('app_foundations_communications.email',$emailParams);
+        }else{
+            $container->setParameter('app_foundations_communications.email',array(
+                'provider' => 'dummy',
+                'sendgridKey' => 'no_key'
+            ));
         }
     }
 }

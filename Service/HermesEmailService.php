@@ -16,6 +16,9 @@ use AppFoundations\CommunicationsBundle\Model\HMail;
 class HermesEmailService
 {
 
+    const PROVIDER_SENDGRID = 'sendgrid';
+    const PROVIDER_DUMMY  = 'dummy';
+
     /**
      * @var HMailDispatcherInterface
      */

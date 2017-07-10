@@ -2,6 +2,7 @@
 
 namespace AppFoundations\CommunicationsBundle\DependencyInjection;
 
+use AppFoundations\CommunicationsBundle\Service\HermesEmailService;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use AppFoundations\CommunicationsBundle\Service\HermesSmsService;
@@ -19,7 +20,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('logicc_foundations_communications');
+        $rootNode = $treeBuilder->root('app_foundations_communications');
 
         $rootNode
             ->fixXmlConfig('dynmark')
@@ -48,6 +49,20 @@ class Configuration implements ConfigurationInterface
                         ->enumNode('persistence')
                             ->values(array( HermesSmsService::PERSISTENCE_FILE, HermesSmsService::PERSISTENCE_DATABASE, HermesSmsService::PERSISTENCE_NONE))
                             ->defaultValue( HermesSmsService::PERSISTENCE_NONE)
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('email')
+                    ->children()
+                        ->enumNode('provider')
+                            ->values(array(HermesEmailService::PROVIDER_DUMMY,HermesEmailService::PROVIDER_SENDGRID))
+                            ->defaultValue(HermesEmailService::PROVIDER_DUMMY)
+                        ->end()
+                        ->arrayNode('sendgrid')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('key')->defaultValue('no_key')->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
