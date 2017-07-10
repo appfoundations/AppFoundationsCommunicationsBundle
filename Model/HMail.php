@@ -35,10 +35,16 @@ class HMail implements JsonSerializable
 
     private $replyTo;
 
+    /**
+     * @var HAttachment
+     */
+    private $attachments;
+
 
     public function __construct()
     {
         $this->to = array();
+        $this->attachments = array();
     }
 
     //helper constructor
@@ -51,6 +57,13 @@ class HMail implements JsonSerializable
         $this->content = new HContent($content);
     }
 
+    public function addAttachment( HAttachment $a ) {
+        $this->attachments[] = $a;
+    }
+
+    public function getAttachments(): array {
+        return $this->attachments;
+    }
 
     /**
      * @return string

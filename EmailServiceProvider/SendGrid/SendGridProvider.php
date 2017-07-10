@@ -15,6 +15,8 @@ use SendGrid\Email;
 use SendGrid\Mail;
 use SendGrid\Personalization;
 use SendGrid\ReplyTo;
+use AppFoundations\CommunicationsBundle\Model\HAttachment;
+use SendGrid\Attachment;
 
 
 class SendGridProvider implements EmailServiceProviderInterface
@@ -102,6 +104,17 @@ class SendGridProvider implements EmailServiceProviderInterface
         }
 
         $mail->addContent($content);
+
+        foreach ($message->getAttachments() as $attachment) {
+            /* @var HAttachment $attachment */
+            $a = new Attachment();
+            $a->setContent( $attachment->getContent() );
+            $a->setContentID( $attachment->getContentID() );
+            $a->setDisposition( $attachment->getDisposition() );
+            $a->setFilename( $attachment->getFilename() );
+            $a->setType( $attachment->getType() );
+            $mail->addAttachment( $a );
+        }
 
         return $mail;
     }
