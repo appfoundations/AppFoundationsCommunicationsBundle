@@ -29,6 +29,16 @@ class HMail implements JsonSerializable
     private $to;
 
     /**
+     * @var HEmail[]
+     */
+    private $cc;
+
+    /**
+     * @var HEmail[]
+     */
+    private $bcc;
+
+    /**
      * @var HContent
      */
     private $content;
@@ -44,6 +54,8 @@ class HMail implements JsonSerializable
     public function __construct()
     {
         $this->to = array();
+        $this->cc = array();
+        $this->bcc = array();
         $this->attachments = array();
     }
 
@@ -51,6 +63,8 @@ class HMail implements JsonSerializable
     public function buildFromRawParts($from,$subject,$to,$content)
     {
         $this->to = array();
+        $this->cc = array();
+        $this->bcc = array();
         $this->from = new HEmail($from);
         $this->subject = $subject;
         $this->to[] = new HEmail($to);
@@ -114,38 +128,104 @@ class HMail implements JsonSerializable
         $this->content = $content;
     }
 
-    /**
-     * @param HEmail $to
-     */
-    public function addTo(HEmail $to)
-    {
-        $this->to[] = $to;
-    }
+        /**
+         * @param HEmail $to
+         */
+        public function addTo(HEmail $to)
+        {
+            $this->to[] = $to;
+        }
 
-    /**
-     * @param HEmail $to
-     */
-    public function removeTo(HEmail $to)
-    {
-        $key = array_search($to,$this->to);
-        unset($this->to[$key]);
-    }
+        /**
+         * @param HEmail $to
+         */
+        public function removeTo(HEmail $to)
+        {
+            $key = array_search($to,$this->to);
+            unset($this->to[$key]);
+        }
 
-    /**
-     * @return HEmail[]
-     */
-    public function getTo(): array
-    {
-        return $this->to;
-    }
+        /**
+         * @return HEmail[]
+         */
+        public function getTo(): array
+        {
+            return $this->to;
+        }
 
-    /**
-     * @param HEmail[] $to
-     */
-    public function setTo(array $to)
-    {
-        $this->to = $to;
-    }
+        /**
+         * @param HEmail[] $to
+         */
+        public function setTo(array $to)
+        {
+            $this->to = $to;
+        }
+
+        /**
+         * @param HEmail $cc
+         */
+        public function addCC(HEmail $cc)
+        {
+            $this->cc[] = $cc;
+        }
+
+        /**
+         * @param HEmail $cc
+         */
+        public function removeCC(HEmail $cc)
+        {
+            $key = array_search($cc,$this->cc);
+            unset($this->cc[$key]);
+        }
+
+        /**
+         * @return HEmail[]
+         */
+        public function getCC(): array
+        {
+            return $this->cc;
+        }
+
+        /**
+         * @param HEmail[] $cc
+         */
+        public function setCC(array $cc)
+        {
+            $this->cc = $cc;
+        }
+
+        /**
+         * @param HEmail $bcc
+         */
+        public function addBCC(HEmail $bcc)
+        {
+            $this->bcc[] = $bcc;
+        }
+
+        /**
+         * @param HEmail $bcc
+         */
+        public function removeBCC(HEmail $bcc)
+        {
+            $key = array_search($bcc,$this->bcc);
+            unset($this->bcc[$key]);
+        }
+
+        /**
+         * @return HEmail[]
+         */
+        public function getBCC(): array
+        {
+            return $this->bcc;
+        }
+
+        /**
+         * @param HEmail[] $bcc
+         */
+        public function setBCC(array $bcc)
+        {
+            $this->bcc = $bcc;
+        }
 
     public function getReplyTo()
     {

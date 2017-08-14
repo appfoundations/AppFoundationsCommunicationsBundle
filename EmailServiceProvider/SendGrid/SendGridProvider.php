@@ -82,6 +82,14 @@ class SendGridProvider implements EmailServiceProviderInterface
             $email = new Email($to->getName(), $to->getAddress());
             $personalization->addTo($email);
         }
+        foreach ($message->getCC() as $to){
+            $email = new Email($to->getName(), $to->getAddress());
+            $personalization->addCc($email);
+        }
+        foreach ($message->getBCC() as $to){
+            $email = new Email($to->getName(), $to->getAddress());
+            $personalization->addBcc($email);
+        }
 
         $mail->addPersonalization($personalization);
 
