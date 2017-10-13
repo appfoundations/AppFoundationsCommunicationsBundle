@@ -2,6 +2,9 @@
 
 namespace AppFoundations\CommunicationsBundle\SmsProvider;
 
+use DateInterval;
+use SoapClient;
+
 class DynmarkSmsProvider implements ISmsProvider {
 
     private $sendSMSAfter;
@@ -22,7 +25,7 @@ class DynmarkSmsProvider implements ISmsProvider {
 //         try {
             // Configuration variables
 
-            $client = new \SoapClient("https://services.dynmark.com/WebServices/MessagingServicesWS.asmx?wsdl", array(
+            $client = new SoapClient("https://services.dynmark.com/WebServices/MessagingServicesWS.asmx?wsdl", array(
                 "connection_timeout" => 130,
             ));
 
