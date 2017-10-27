@@ -2,6 +2,7 @@
 
 namespace AppFoundations\CommunicationsBundle\Service;
 
+use AppFoundations\CommunicationsBundle\SmsProvider\ComapiSmsProvider;
 use Monolog\Logger;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use AppFoundations\CommunicationsBundle\SmsProvider\ISmsProvider;
@@ -13,6 +14,7 @@ class HermesSmsService
     const PROVIDER_TXTLOCAL = 'txtlocal';
     const PROVIDER_DYNMARK  = 'dynmark';
     const PROVIDER_NONE     = 'none';
+    const PROVIDER_COMAPI     = 'comapi';
 
     const MODE_SYNC     = 'sync';
     const MODE_ASYNC    = 'async';
@@ -39,9 +41,10 @@ class HermesSmsService
 
     /**
      * HermesService constructor.
-     * @param string $providerName
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param $configuration
+     * @param ManagerRegistry $managerRegistry
      * @param Logger $logger
+     * @throws \Exception
      */
     public function __construct($configuration, ManagerRegistry $managerRegistry, Logger $logger)
     {
@@ -53,11 +56,14 @@ class HermesSmsService
             case 'dynmark':
                 $this->provider = new DynmarkSmsProvider($configuration);
                 break;
+            case 'comapi':
+                $this->provider = new ComapiSmsProvider($configuration);
+                break;
             case 'none':
                 $this->provider = NULL;
                 break;
             default:
-                throw new \Exception('Unknown provider: ' . $providerName);
+                throw new \Exception('Unknown provider: ' . $configuration['provider']);
         }
 
         if ($this->configuration['mode'] == self::MODE_ASYNC) {
@@ -71,15 +77,18 @@ class HermesSmsService
 
 
     /**
-     * Send a mail object through the current provider
+     * Send a sms message through the current provider
      *
-     * @param Mail $mailToSend
+     * @param $dst
+     * @param $content
+     * @param \DateTime|null $schedule
+     * @param null $sendAs
      * @return array
      */
     public function sendSms($dst, $content, \DateTime $schedule = NULL, $sendAs = NULL)
     {
         if (isset($this->provider)) {
-            $this->provider->sendSms($dst, $content,$schedule, $sendAs);
+            return $this->provider->sendSms($dst, $content,$schedule, $sendAs);
         }
     }
 }
