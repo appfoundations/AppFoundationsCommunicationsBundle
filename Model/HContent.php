@@ -31,7 +31,7 @@ class HContent implements JsonSerializable
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType()
     {
         return $this->type;
     }
@@ -39,7 +39,7 @@ class HContent implements JsonSerializable
     /**
      * @return string
      */
-    public function getText(): string
+    public function getText()
     {
         return $this->text;
     }

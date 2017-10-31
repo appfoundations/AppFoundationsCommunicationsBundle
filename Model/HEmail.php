@@ -35,7 +35,7 @@ class HEmail implements JsonSerializable
     /**
      * @return string
      */
-    public function getAddress(): string
+    public function getAddress()
     {
         return $this->address;
     }
