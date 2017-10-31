@@ -10,7 +10,13 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\StreamHandler;
 
-
+/**
+ * SMS provider leveraging Dynmark Comapi API
+ * docs: https://docs.comapi.com/reference#oneapi-calling-the-one-api
+ * Class ComapiSmsProvider
+ * @package AppFoundations\CommunicationsBundle\SmsProvider
+ *
+ */
 class ComapiSmsProvider implements ISmsProvider
 {
     private $apiSpace;
