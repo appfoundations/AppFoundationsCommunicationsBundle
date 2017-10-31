@@ -111,7 +111,7 @@ class HMailSendAttempt implements JsonSerializable
     /**
      * @param string $providerName
      */
-    public function setProviderName(string $providerName)
+    public function setProviderName($providerName)
     {
         $this->providerName = $providerName;
     }
@@ -127,7 +127,7 @@ class HMailSendAttempt implements JsonSerializable
     /**
      * @param string $attemptStatus
      */
-    public function setAttemptStatus(string $attemptStatus)
+    public function setAttemptStatus($attemptStatus)
     {
         $this->attemptStatus = $attemptStatus;
     }

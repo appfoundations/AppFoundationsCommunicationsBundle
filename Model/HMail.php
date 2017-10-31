@@ -90,7 +90,7 @@ class HMail implements JsonSerializable
     /**
      * @param string $subject
      */
-    public function setSubject(string $subject)
+    public function setSubject($subject)
     {
         $this->subject = $subject;
     }
