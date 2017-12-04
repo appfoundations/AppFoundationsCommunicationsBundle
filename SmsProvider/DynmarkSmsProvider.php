@@ -47,8 +47,8 @@ class DynmarkSmsProvider implements ISmsProvider {
             }
 
             $params = array(
-                "name" => $this->username, //"pantherwarehousing",
-                "password" => $this->password, //"5a5mg96y2Qu5c7942guR",
+                "name" => $this->username,
+                "password" => $this->password,
                 "message" => array(
                     $message,
                 ),
