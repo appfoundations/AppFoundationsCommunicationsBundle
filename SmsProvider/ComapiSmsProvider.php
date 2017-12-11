@@ -38,7 +38,7 @@ class ComapiSmsProvider implements ISmsProvider
         error_log($dst);
         error_log($content);
 
-        $fullRecipient = (strlen($dst) < 12) ? ("44".$dst) : $dst;
+        $fullRecipient = $dst;
 
 
         $handler = new StreamHandler();
