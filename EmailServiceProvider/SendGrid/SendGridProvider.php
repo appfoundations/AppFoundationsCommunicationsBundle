@@ -116,7 +116,7 @@ class SendGridProvider implements EmailServiceProviderInterface
         foreach ($message->getAttachments() as $attachment) {
             /* @var HAttachment $attachment */
             $a = new Attachment();
-            $a->setContent( $attachment->getContent() );
+            $a->setContent( base64_encode($attachment->getContent()) );
             $a->setContentID( $attachment->getContentID() );
             $a->setDisposition( $attachment->getDisposition() );
             $a->setFilename( $attachment->getFilename() );
