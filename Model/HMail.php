@@ -75,14 +75,14 @@ class HMail implements JsonSerializable
         $this->attachments[] = $a;
     }
 
-    public function getAttachments(): array {
+    public function getAttachments() {
         return $this->attachments;
     }
 
     /**
      * @return string
      */
-    public function getSubject(): string
+    public function getSubject()
     {
         return $this->subject;
     }
@@ -90,7 +90,7 @@ class HMail implements JsonSerializable
     /**
      * @param string $subject
      */
-    public function setSubject(string $subject)
+    public function setSubject($subject)
     {
         $this->subject = $subject;
     }
@@ -99,7 +99,7 @@ class HMail implements JsonSerializable
     /**
      * @return HEmail
      */
-    public function getFrom(): HEmail
+    public function getFrom()
     {
         return $this->from;
     }
@@ -115,7 +115,7 @@ class HMail implements JsonSerializable
     /**
      * @return HContent
      */
-    public function getContent(): HContent
+    public function getContent()
     {
         return $this->content;
     }
@@ -148,7 +148,7 @@ class HMail implements JsonSerializable
         /**
          * @return HEmail[]
          */
-        public function getTo(): array
+        public function getTo()
         {
             return $this->to;
         }
@@ -181,7 +181,7 @@ class HMail implements JsonSerializable
         /**
          * @return HEmail[]
          */
-        public function getCC(): array
+        public function getCC()
         {
             return $this->cc;
         }
@@ -214,7 +214,7 @@ class HMail implements JsonSerializable
         /**
          * @return HEmail[]
          */
-        public function getBCC(): array
+        public function getBCC()
         {
             return $this->bcc;
         }

@@ -39,7 +39,7 @@ class EmailProviderResult implements JsonSerializable
     /**
      * @return string
      */
-    public function getStatus(): string
+    public function getStatus()
     {
         return $this->status;
     }
@@ -47,7 +47,7 @@ class EmailProviderResult implements JsonSerializable
     /**
      * @return array
      */
-    public function getRawResults(): array
+    public function getRawResults()
     {
         return $this->rawResults;
     }

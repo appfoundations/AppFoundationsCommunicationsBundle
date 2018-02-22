@@ -35,6 +35,11 @@ class AppFoundationsCommunicationsExtension extends Extension
                     'username' => $config['sms']['dynmark']['username'],
                     'password' => $config['sms']['dynmark']['password'],
                 ),
+                'comapi' => array (
+                    'space' => $config['sms']['comapi']['space'],
+                    'token' => $config['sms']['comapi']['token'],
+                    'sender' => $config['sms']['comapi']['sender']
+                ),
             ));
         } else {
             $container->setParameter('app_foundations_communications.sms',array());

@@ -18,7 +18,13 @@ use SendGrid\ReplyTo;
 use AppFoundations\CommunicationsBundle\Model\HAttachment;
 use SendGrid\Attachment;
 
-
+/**
+ * Email provider leveraging Sengrid APi v3
+ * docs: https://sendgrid.com/docs/API_Reference/api_v3.html
+ * docs: https://github.com/sendgrid/sendgrid-php
+ * Class SendGridProvider
+ * @package AppFoundations\CommunicationsBundle\EmailServiceProvider\SendGrid
+ */
 class SendGridProvider implements EmailServiceProviderInterface
 {
 
