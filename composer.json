@@ -18,8 +18,8 @@
 		"guzzlehttp/guzzle": "~6.0"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"AppFoundations\\CommunicationsBundle" : ""
+		"psr-4" : {
+			"AppFoundations\\CommunicationsBundle\\" : ""
 		}
 	},
 	"target-dir" : "AppFoundations/CommunicationsBundle"
