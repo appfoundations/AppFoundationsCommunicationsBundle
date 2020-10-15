@@ -21,6 +21,5 @@
 		"psr-4" : {
 			"AppFoundations\\CommunicationsBundle\\" : ""
 		}
-	},
-	"target-dir" : "AppFoundations/CommunicationsBundle"
+	}
 }
