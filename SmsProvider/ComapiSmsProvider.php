@@ -35,10 +35,7 @@ class ComapiSmsProvider implements ISmsProvider
 
     public function sendSms($dst, $content, \DateTime $schedule = NULL, $sendAs = NULL)
     {
-        error_log($dst);
-        error_log($content);
-
-        $fullRecipient = $dst;
+        $fullRecipient = (strlen($dst) < 12) ? ("44".$dst) : $dst;
 
 
         $handler = new StreamHandler();
@@ -66,11 +63,10 @@ class ComapiSmsProvider implements ISmsProvider
             $code = $response->getStatusCode(); // 200
             $reason = $response->getReasonPhrase(); // OK
 
-            error_log(Psr7\str($response));
 
             return [
                 'status' => 'OK',
-                'details' => ['code' => $code,'reason' => $reason]
+                'details' => ['code' => $code,'reason' => $reason, 'dst' => $fullRecipient, 'content' => $content]
                 ];
         } catch (RequestException $e) {
             $requestStr = Psr7\str($e->getRequest());
