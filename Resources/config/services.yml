@@ -23,5 +23,4 @@ services:
         class: 'AppFoundations\CommunicationsBundle\Service\HermesSmsService'
         arguments:
         - '%app_foundations_communications.sms%'
-        - '@doctrine'
         - '@logger'
