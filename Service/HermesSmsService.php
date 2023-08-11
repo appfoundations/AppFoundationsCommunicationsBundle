@@ -4,7 +4,6 @@ namespace AppFoundations\CommunicationsBundle\Service;
 
 use AppFoundations\CommunicationsBundle\SmsProvider\ComapiSmsProvider;
 use Monolog\Logger;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use AppFoundations\CommunicationsBundle\SmsProvider\ISmsProvider;
 use AppFoundations\CommunicationsBundle\SmsProvider\DynmarkSmsProvider;
 
@@ -29,11 +28,6 @@ class HermesSmsService
     private $provider;
 
     private $configuration;
-
-    /**
-     * @var ManagerRegistry
-     */
-    private $managerRegistry;
     /**
      * @var Logger
      */
@@ -46,9 +40,8 @@ class HermesSmsService
      * @param Logger $logger
      * @throws \Exception
      */
-    public function __construct($configuration, ManagerRegistry $managerRegistry, Logger $logger)
+    public function __construct($configuration, Logger $logger)
     {
-        $this->managerRegistry = $managerRegistry;
         $this->logger = $logger->withName("Logicc/HermesSmsService");
         $this->configuration = $configuration;
 
