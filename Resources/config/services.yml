@@ -13,14 +13,17 @@ services:
 
     app_foundations_communications.basic_email_dispatcher:
         class: 'AppFoundations\CommunicationsBundle\Service\BasicHMailDispatcher'
+        public: true
         arguments: ['%app_foundations_communications.email%']
 
     app_foundations_communications.hermes_email_service:
         class: 'AppFoundations\CommunicationsBundle\Service\HermesEmailService'
+        public: true
         arguments: ['@app_foundations_communications.basic_email_dispatcher']
         
     app_foundations_communications.hermes_sms_service:
         class: 'AppFoundations\CommunicationsBundle\Service\HermesSmsService'
+        public: true
         arguments:
         - '%app_foundations_communications.sms%'
         - '@logger'
