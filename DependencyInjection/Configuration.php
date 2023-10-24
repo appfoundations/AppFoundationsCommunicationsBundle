@@ -1,5 +1,4 @@
 <?php
-
 namespace AppFoundations\CommunicationsBundle\DependencyInjection;
 
 use AppFoundations\CommunicationsBundle\Service\HermesEmailService;
@@ -14,66 +13,75 @@ use AppFoundations\CommunicationsBundle\Service\HermesSmsService;
  */
 class Configuration implements ConfigurationInterface
 {
+
     /**
+     *
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('app_foundations_communications');
+        $treeBuilder = new TreeBuilder('app_foundations_communications');
+        $root = $treeBuilder->getRootNode();
 
-        $rootNode
-            ->fixXmlConfig('dynmark')
+        $rootNode->fixXmlConfig('dynmark')
             ->children()
-                ->arrayNode('sms')
-
-                    ->children()
-                        ->arrayNode('dynmark')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('username')->defaultValue(null)->end()
-                                ->scalarNode('password')->defaultValue(null)->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('comapi')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('space')->defaultValue(null)->end()
-                                ->scalarNode('token')->defaultValue(null)->end()
-                                ->scalarNode('sender')->defaultValue(null)->end()
-                            ->end()
-                        ->end()
-                        ->integerNode('minhour')
-                            ->defaultValue( 7 )
-                        ->end()
-                        ->scalarNode('provider')
-                        //    ->values(array( HermesSmsService::PROVIDER_TXTLOCAL,HermesSmsService::PROVIDER_DYNMARK,HermesSmsService::PROVIDER_NONE,HermesSmsService::PROVIDER_COMAPI))
-                             ->defaultValue( HermesSmsService::PROVIDER_NONE )
-                        ->end()
-                        ->scalarNode('mode')
-                            //->values(array( HermesSmsService::MODE_SYNC, HermesSmsService::MODE_ASYNC))
-                            ->defaultValue( HermesSmsService::MODE_SYNC)
-                        ->end()
-                        ->scalarNode('persistence')
-                            //->values(array( HermesSmsService::PERSISTENCE_FILE, HermesSmsService::PERSISTENCE_DATABASE, HermesSmsService::PERSISTENCE_NONE))
-                            ->defaultValue( HermesSmsService::PERSISTENCE_NONE)
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('email')
-                    ->children()
-                        ->scalarNode('provider')
-                        //    ->values(array(HermesEmailService::PROVIDER_DUMMY,HermesEmailService::PROVIDER_SENDGRID))
-                            ->defaultValue(HermesEmailService::PROVIDER_DUMMY)
-                        ->end()
-                        ->arrayNode('sendgrid')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('key')->defaultValue('no_key')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
+            ->arrayNode('sms')
+            ->
+        children()
+            ->arrayNode('dynmark')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('username')
+            ->defaultValue(null)
+            ->end()
+            ->scalarNode('password')
+            ->defaultValue(null)
+            ->end()
+            ->end()
+            ->end()
+            ->arrayNode('comapi')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('space')
+            ->defaultValue(null)
+            ->end()
+            ->scalarNode('token')
+            ->defaultValue(null)
+            ->end()
+            ->scalarNode('sender')
+            ->defaultValue(null)
+            ->end()
+            ->end()
+            ->end()
+            ->integerNode('minhour')
+            ->defaultValue(7)
+            ->end()
+            ->scalarNode('provider')
+            ->defaultValue(HermesSmsService::PROVIDER_NONE)
+            ->end()
+            ->scalarNode('mode')
+            ->defaultValue(HermesSmsService::MODE_SYNC)
+            ->end()
+            ->scalarNode('persistence')
+            ->defaultValue(HermesSmsService::PERSISTENCE_NONE)
+            ->end()
+            ->end()
+            ->end()
+            ->arrayNode('email')
+            ->children()
+            ->scalarNode('provider')
+            ->defaultValue(HermesEmailService::PROVIDER_DUMMY)
+            ->end()
+            ->arrayNode('sendgrid')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('key')
+            ->defaultValue('no_key')
+            ->end()
+            ->end()
+            ->end()
+            ->end()
+            ->end()
             ->end();
 
         return $treeBuilder;
