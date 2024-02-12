@@ -1,7 +1,7 @@
 {
 	"name" : "appfoundations/communications-bundle",
 	"description" : "A communications (email and sms) bundle",
-	"version" : "0.0.9",
+	"version" : "0.0.10",
 	"type" : "symfony-bundle",
 	"authors" : [{
 			"name" : "demo",
@@ -14,8 +14,9 @@
 	],
 	"license" : "MIT",
 	"require" : {
-		"sendgrid/sendgrid" : "^5.2",
-		"guzzlehttp/guzzle" : "~7.0"
+		"guzzlehttp/guzzle" : "~7.0",
+    "sendgrid/sendgrid" : "^5.2",
+		"symfony/config" : "^5.4"
 	},
 	"autoload" : {
 		"psr-4" : {
