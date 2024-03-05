@@ -22,5 +22,8 @@
 		"psr-4" : {
 			"AppFoundations\\CommunicationsBundle\\" : ""
 		}
+	},
+	"require-dev": {
+		"phpunit/phpunit" : "^9.5"
 	}
 }
