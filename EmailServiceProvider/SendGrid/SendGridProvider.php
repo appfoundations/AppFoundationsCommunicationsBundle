@@ -17,6 +17,7 @@ use SendGrid\Personalization;
 use SendGrid\ReplyTo;
 use AppFoundations\CommunicationsBundle\Model\HAttachment;
 use SendGrid\Attachment;
+use AppFoundations\CommunicationsBundle\Service\SendGridFactory as ServiceSendGridFactory;
 
 /**
  * Email provider leveraging Sengrid APi v3
@@ -51,7 +52,7 @@ class SendGridProvider implements EmailServiceProviderInterface
             throw new \Exception("No send grid key defined");
         }
 
-        $sg = new SendGrid($this->sendGridKey);
+        $sg = ServiceSendGridFactory::createSendGrid($this->sendGridKey);
 
         $response = $sg->client->mail()->send()->post($sendGridMessage);
         $result = array();

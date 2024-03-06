@@ -12,11 +12,11 @@ class SendGridFactory {
 		self::$mockSendGrid = $m;
 	}
 
-	static function createSendGrid() {
+	static function createSendGrid($key) {
 		if (!empty(self::$mockSendGrid)) {
 			return self::$mockSendGrid;
 		}
-		return new SendGrid('test');
+		return new SendGrid($key);
 	}
 
 }
