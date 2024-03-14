@@ -10,13 +10,13 @@ use AppFoundations\CommunicationsBundle\Model\EmailProviderResult;
 use AppFoundations\CommunicationsBundle\Model\HContent;
 use AppFoundations\CommunicationsBundle\Model\HMail;
 use SendGrid;
-use SendGrid\Content;
-use SendGrid\Email;
-use SendGrid\Mail;
-use SendGrid\Personalization;
-use SendGrid\ReplyTo;
+use SendGrid\Mail\Content;
+use SendGrid\Mail\To;
+use SendGrid\Mail\Mail;
+use SendGrid\Mail\Personalization;
+use SendGrid\Mail\ReplyTo;
 use AppFoundations\CommunicationsBundle\Model\HAttachment;
-use SendGrid\Attachment;
+use SendGrid\Mail\Attachment;
 
 /**
  * Email provider leveraging Sengrid APi v3
@@ -78,22 +78,21 @@ class SendGridProvider implements EmailServiceProviderInterface
     private function buildFromHMail(HMail $message)
     {
         $mail = new Mail();
-        $email = new Email($message->getFrom()->getName(), $message->getFrom()->getAddress());
-        $mail->setFrom($email);
+        $mail->setFrom($message->getFrom()->getAddress(), $message->getFrom()->getName());
 
         $mail->setSubject($message->getSubject());
 
         $personalization = new Personalization();
         foreach ($message->getTo() as $to){
-            $email = new Email($to->getName(), $to->getAddress());
+            $email = new To($to->getAddress(), $to->getName());
             $personalization->addTo($email);
         }
         foreach ($message->getCC() as $to){
-            $email = new Email($to->getName(), $to->getAddress());
+            $email = new Email($to->getAddress(), $to->getName());
             $personalization->addCc($email);
         }
         foreach ($message->getBCC() as $to){
-            $email = new Email($to->getName(), $to->getAddress());
+            $email = new Email($to->getAddress(), $to->getName());
             $personalization->addBcc($email);
         }
 
@@ -123,10 +122,19 @@ class SendGridProvider implements EmailServiceProviderInterface
             /* @var HAttachment $attachment */
             $a = new Attachment();
             $a->setContent( base64_encode($attachment->getContent()) );
-            $a->setContentID( $attachment->getContentID() );
-            $a->setDisposition( $attachment->getDisposition() );
+            $contentId = $attachment->getContentID();
+            if (!empty($contentId)) {
+                $a->setContentID( $attachment->getContentID() );
+            }
+            $disposition = $attachment->getDisposition();
+            if (!empty($disposition)) {
+                $a->setDisposition( $disposition );
+            }
             $a->setFilename( $attachment->getFilename() );
-            $a->setType( $attachment->getType() );
+            $type = $attachment->getType();
+            if (!empty($type)) {
+                $a->setType( $type );
+            }
             $mail->addAttachment( $a );
         }
 
