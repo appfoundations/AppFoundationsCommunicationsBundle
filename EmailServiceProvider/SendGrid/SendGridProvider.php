@@ -88,11 +88,11 @@ class SendGridProvider implements EmailServiceProviderInterface
             $personalization->addTo($email);
         }
         foreach ($message->getCC() as $to){
-            $email = new Email($to->getAddress(), $to->getName());
+            $email = new To($to->getAddress(), $to->getName());
             $personalization->addCc($email);
         }
         foreach ($message->getBCC() as $to){
-            $email = new Email($to->getAddress(), $to->getName());
+            $email = new To($to->getAddress(), $to->getName());
             $personalization->addBcc($email);
         }
 

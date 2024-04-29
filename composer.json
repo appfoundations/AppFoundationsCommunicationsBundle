@@ -1,7 +1,7 @@
 {
 	"name" : "appfoundations/communications-bundle",
 	"description" : "A communications (email and sms) bundle",
-	"version" : "0.0.13",
+	"version" : "0.0.14",
 	"type" : "symfony-bundle",
 	"authors" : [{
 			"name" : "demo",
