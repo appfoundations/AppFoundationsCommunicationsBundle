@@ -48,7 +48,8 @@ class AppFoundationsCommunicationsExtension extends Extension
         if (isset($config['email'])){
             $emailParams = array(
                 'provider' => $config['email']['provider'],
-                'sendgridKey' => $config['email']['sendgrid']['key']
+                'sendgridKey' => $config['email']['sendgrid']['key'],
+                'sendgridRegion' => $config['email']['sendgrid']['region'],
             );
 
             $container->setParameter('app_foundations_communications.email',$emailParams);

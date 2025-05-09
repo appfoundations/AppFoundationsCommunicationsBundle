@@ -27,7 +27,10 @@ class BasicHMailDispatcher implements HMailDispatcherInterface
                 $this->emailServiceProvider = new DummyEmailProvider();
                 break;
             case HermesEmailService::PROVIDER_SENDGRID:
-                $this->emailServiceProvider = new SendGridProvider($configuration['sendgridKey']);
+                $this->emailServiceProvider = new SendGridProvider(
+                    $configuration['sendgridKey'],
+                    $configuration['sendgridRegion'],
+                );
                 break;
             default:
                 throw new \Exception('Unknown provider: ' . $configuration['provider']);

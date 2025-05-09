@@ -28,15 +28,10 @@ use SendGrid\Mail\Attachment;
 class SendGridProvider implements EmailServiceProviderInterface
 {
 
-    /**
-     * @var
-     */
-    private $sendGridKey;
-
-    public function __construct($sendGridKey = null)
-    {
-        $this->sendGridKey = $sendGridKey;
-    }
+    public function __construct(
+        private $sendGridKey = null,
+        private $region = null)
+    {}
 
     /**
      * @param HMail $message
@@ -52,6 +47,9 @@ class SendGridProvider implements EmailServiceProviderInterface
         }
 
         $sg = new SendGrid($this->sendGridKey);
+        if (!empty($this->region)) {
+            $sg->setDataResidency($this->region);
+        }
 
         $response = $sg->client->mail()->send()->post($sendGridMessage);
         $result = array();
